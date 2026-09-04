@@ -1,0 +1,6 @@
+C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/thaco.equipment.actuator.Command.h:73:6:__thaco_equipment_actuator_Command_encode	1
+C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/thaco.equipment.actuator.Command.h:116:6:__thaco_equipment_actuator_Command_decode	1
+C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/thaco.equipment.actuator.ArrayCommand.h:81:6:__thaco_equipment_actuator_ArrayCommand_encode	3
+C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/thaco.equipment.actuator.ArrayCommand.h:134:6:__thaco_equipment_actuator_ArrayCommand_decode	9
+../Middleware/dronecan/dsdl_generated/src/thaco.equipment.actuator.ArrayCommand.c:12:10:_thaco_equipment_actuator_ArrayCommand_encode	1
+../Middleware/dronecan/dsdl_generated/src/thaco.equipment.actuator.ArrayCommand.c:32:6:_thaco_equipment_actuator_ArrayCommand_decode	2

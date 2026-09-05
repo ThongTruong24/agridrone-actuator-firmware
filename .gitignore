@@ -1,0 +1,5 @@
+# STM32CubeIDE managed-build output
+/Debug/
+/Release/
+/Targets/*/Debug/
+/Targets/*/Release/

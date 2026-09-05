@@ -2,14 +2,24 @@
 
 #include "actuator_app.h"
 #include "can_task.h"
-#include "main.h"
 #include "task.h"
 
-BaseType_t rtos_init(CAN_HandleTypeDef *can_handle,
-                     UART_HandleTypeDef *console_uart)
+static void fatal_stop(void)
 {
+    taskDISABLE_INTERRUPTS();
+    for (;;)
+    {
+    }
+}
+
+BaseType_t rtos_init(const void *legacy_can_handle,
+                     const void *legacy_console_uart)
+{
+    (void) legacy_can_handle;
+    (void) legacy_console_uart;
+
     actuator_app_init();
-    return can_tasks_init(can_handle, console_uart);
+    return can_tasks_init();
 }
 
 void vApplicationStackOverflowHook(TaskHandle_t task,
@@ -17,11 +27,10 @@ void vApplicationStackOverflowHook(TaskHandle_t task,
 {
     (void) task;
     (void) task_name;
-
-    Error_Handler();
+    fatal_stop();
 }
 
 void vApplicationMallocFailedHook(void)
 {
-    Error_Handler();
+    fatal_stop();
 }

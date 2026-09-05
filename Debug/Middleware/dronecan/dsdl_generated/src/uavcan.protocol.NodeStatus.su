@@ -1,4 +1,0 @@
-C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/uavcan.protocol.NodeStatus.h:117:6:__uavcan_protocol_NodeStatus_encode	24	static
-C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/uavcan.protocol.NodeStatus.h:178:6:__uavcan_protocol_NodeStatus_decode	32	static
-../Middleware/dronecan/dsdl_generated/src/uavcan.protocol.NodeStatus.c:12:10:_uavcan_protocol_NodeStatus_encode	24	static
-../Middleware/dronecan/dsdl_generated/src/uavcan.protocol.NodeStatus.c:32:6:_uavcan_protocol_NodeStatus_decode	24	static

@@ -1,7 +1,10 @@
 #ifndef DRONECAN_H
 #define DRONECAN_H
 
+#include <stdbool.h>
 #include <stdint.h>
+
+#define DRONECAN_ACTUATOR_COMMAND_CAPACITY 8U
 
 typedef struct
 {
@@ -15,11 +18,6 @@ typedef struct
     uint8_t mode;
     uint8_t sub_mode;
 } DronecanNodeStatus;
-
-typedef void (*DronecanNodeStatusHandler)(const DronecanNodeStatus *status,
-                                          void *user_reference);
-
-#define DRONECAN_ACTUATOR_COMMAND_CAPACITY 8U
 
 typedef struct
 {
@@ -39,25 +37,39 @@ typedef struct
     uint8_t priority;
 } DronecanActuatorArrayCommand;
 
+typedef void (*DronecanNodeStatusHandler)(const DronecanNodeStatus *status,
+                                          void *user_reference);
 typedef void (*DronecanActuatorArrayCommandHandler)(
     const DronecanActuatorArrayCommand *array_command,
     void *user_reference);
 
-extern volatile uint32_t dronecan_rx_error_count;
-extern volatile uint32_t dronecan_node_status_decode_error_count;
-extern volatile uint32_t dronecan_node_status_received_count;
-extern volatile uint32_t dronecan_array_command_decode_error_count;
-extern volatile uint32_t dronecan_array_command_received_count;
+typedef enum
+{
+    DRONECAN_PROCESS_IDLE = 0,
+    DRONECAN_PROCESS_FRAME,
+    DRONECAN_PROCESS_ERROR,
+} dronecan_process_result_t;
 
-void dronecan_init(DronecanNodeStatusHandler node_status_handler,
-                   DronecanActuatorArrayCommandHandler array_command_handler,
-                   void *user_reference);
+typedef struct
+{
+    uint32_t rx_error_count;
+    uint32_t node_status_decode_error_count;
+    uint32_t node_status_received_count;
+    uint32_t array_command_decode_error_count;
+    uint32_t array_command_received_count;
+    uint32_t queue_drop_count;
+    uint32_t hardware_received_frame_count;
+    uint32_t hardware_error_count;
+} dronecan_statistics_t;
 
-int16_t dronecan_process_rx_frame(uint32_t extended_can_id,
-                                  const uint8_t *data,
-                                  uint8_t data_length,
-                                  uint64_t timestamp_usec);
+void dronecan_set_node_status_handler(DronecanNodeStatusHandler handler,
+                                      void *user_reference);
+void dronecan_set_array_command_handler(
+    DronecanActuatorArrayCommandHandler handler,
+    void *user_reference);
 
-void dronecan_cleanup_stale_transfers(uint64_t timestamp_usec);
+bool dronecan_init(void);
+dronecan_process_result_t dronecan_process(uint32_t timeout_ms);
+dronecan_statistics_t dronecan_get_statistics(void);
 
 #endif /* DRONECAN_H */

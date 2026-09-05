@@ -1,9 +1,0 @@
-C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/thaco.equipment.actuator.ArrayCommand.h:71:20:thaco_equipment_actuator_ArrayCommand_decode	1
-C:/Users/truonghquangthong/Documents/drone_actuator/Middleware/dronecan/dsdl_generated/include/uavcan.protocol.NodeStatus.h:107:20:uavcan_protocol_NodeStatus_decode	1
-../Middleware/dronecan/dronecan.c:39:13:should_accept_transfer	6
-../Middleware/dronecan/dronecan.c:70:13:handle_node_status	3
-../Middleware/dronecan/dronecan.c:104:13:handle_array_command	5
-../Middleware/dronecan/dronecan.c:147:13:on_transfer_reception	5
-../Middleware/dronecan/dronecan.c:173:6:dronecan_init	1
-../Middleware/dronecan/dronecan.c:195:9:dronecan_process_rx_frame	11
-../Middleware/dronecan/dronecan.c:238:6:dronecan_cleanup_stale_transfers	1

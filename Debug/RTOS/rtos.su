@@ -1,3 +1,0 @@
-../RTOS/rtos.c:8:12:rtos_init	16	static
-../RTOS/rtos.c:15:6:vApplicationStackOverflowHook	16	static
-../RTOS/rtos.c:24:6:vApplicationMallocFailedHook	8	static

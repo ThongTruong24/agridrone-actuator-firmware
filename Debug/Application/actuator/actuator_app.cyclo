@@ -1,0 +1,5 @@
+../Application/actuator/actuator_app.c:11:13:is_gripper_id	3
+../Application/actuator/actuator_app.c:17:6:actuator_app_init	2
+../Application/actuator/actuator_app.c:30:6:actuator_app_apply_command	6
+../Application/actuator/actuator_app.c:69:6:actuator_app_get_gripper	3
+../Application/actuator/actuator_app.c:82:24:actuator_app_get_data	1

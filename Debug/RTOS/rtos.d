@@ -32,6 +32,7 @@ RTOS/rtos.o: ../RTOS/rtos.c ../RTOS/rtos.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ C:/Users/truonghquangthong/Documents/drone_actuator/Application/actuator/actuator_app.h \
  C:/Users/truonghquangthong/Documents/drone_actuator/RTOS/tasks/can_task.h \
  ../Core/Inc/main.h \
  C:/Users/truonghquangthong/Documents/drone_actuator/ThirdParty/FreeRTOS-Kernel/include/task.h \
@@ -70,6 +71,7 @@ C:/Users/truonghquangthong/Documents/drone_actuator/ThirdParty/FreeRTOS-Kernel/i
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+C:/Users/truonghquangthong/Documents/drone_actuator/Application/actuator/actuator_app.h:
 C:/Users/truonghquangthong/Documents/drone_actuator/RTOS/tasks/can_task.h:
 ../Core/Inc/main.h:
 C:/Users/truonghquangthong/Documents/drone_actuator/ThirdParty/FreeRTOS-Kernel/include/task.h:

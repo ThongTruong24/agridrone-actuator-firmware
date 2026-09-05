@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "actuator_app.h"
 #include "app_config.h"
 #include "dronecan.h"
 #include "dronecan_config.h"
@@ -268,7 +269,6 @@ static void node_status_received(const DronecanNodeStatus *status,
     position = append_text(line, position, "\r\n");
 
     console_write(line, (uint16_t) position);
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 }
 
 static void array_command_received(
@@ -279,6 +279,18 @@ static void array_command_received(
     size_t position = 0U;
 
     (void) user_reference;
+
+    for (uint8_t index = 0U;
+         (index < array_command->command_count) &&
+         (index < DRONECAN_ACTUATOR_COMMAND_CAPACITY);
+         index++)
+    {
+        (void) actuator_app_apply_command(
+            array_command->timestamp_ms,
+            array_command->commands[index].actuator_id,
+            array_command->commands[index].value,
+            array_command->commands[index].command_id);
+    }
 
     position = append_text(line, position, "ArrayCommand id=0x");
     position = append_hex(line, position, array_command->can_id, 8U);
@@ -331,7 +343,6 @@ static void array_command_received(
         console_write(line, (uint16_t) position);
     }
 
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 }
 #endif
 

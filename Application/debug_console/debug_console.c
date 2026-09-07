@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 #include "app_config.h"
+#include "board_pwm.h"
 #include "board_uart.h"
 #include "command_service.h"
 #include "health_service.h"
@@ -187,6 +188,44 @@ static void on_array_command(const command_service_batch_t *batch,
         position = append_uint32(line,
                                  position,
                                  batch->commands[index].command_id);
+        position = append_text(line, position, "\r\n");
+        console_write(line, position);
+    }
+
+    board_pwm_state_t pwm_state;
+    if ((batch->command_count > 0U) &&
+        board_pwm_get_state(&pwm_state))
+    {
+        const command_service_command_t *const applied_command =
+            &batch->commands[batch->command_count - 1U];
+
+        position = 0U;
+        position = append_text(line, position, "  PWM actuator_id=");
+        position = append_uint32(line,
+                                 position,
+                                 applied_command->actuator_id);
+        position = append_text(line, position, " value=");
+        position = append_uint32(line, position, applied_command->value);
+        position = append_text(line, position, " pulse_us=");
+        position = append_uint32(line,
+                                 position,
+                                 pwm_state.pulse_width_us);
+        position = append_text(line, position, " compare_ticks=");
+        position = append_uint32(line,
+                                 position,
+                                 pwm_state.compare_ticks);
+        position = append_text(line, position, " period_ticks=");
+        position = append_uint32(line,
+                                 position,
+                                 pwm_state.period_ticks);
+        position = append_text(line, position, " tick_hz=");
+        position = append_uint32(line,
+                                 position,
+                                 pwm_state.timer_tick_hz);
+        position = append_text(line, position, " running=");
+        position = append_uint32(line,
+                                 position,
+                                 pwm_state.running ? 1U : 0U);
         position = append_text(line, position, "\r\n");
         console_write(line, position);
     }

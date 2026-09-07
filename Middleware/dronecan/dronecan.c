@@ -109,7 +109,6 @@ static void handle_array_command(const CanardRxTransfer *transfer)
 
     array_command.can_id = transfer_can_id(transfer);
     array_command.timestamp_ms = decoded.timestamp_ms;
-    array_command.command_count = decoded.commands.len;
     array_command.source_node_id = transfer->source_node_id;
     array_command.transfer_id = transfer->transfer_id;
     array_command.priority = transfer->priority;
@@ -119,12 +118,25 @@ static void handle_array_command(const CanardRxTransfer *transfer)
          (index < DRONECAN_ACTUATOR_COMMAND_CAPACITY);
          index++)
     {
-        array_command.commands[index].actuator_id =
-            decoded.commands.data[index].actuator_id;
-        array_command.commands[index].value =
-            decoded.commands.data[index].value;
-        array_command.commands[index].command_id =
-            decoded.commands.data[index].command_id;
+        const struct thaco_equipment_actuator_Command *const source =
+            &decoded.commands.data[index];
+
+        if (source->actuator_id != (uint8_t) DRONECAN_ACTUATOR_ID)
+        {
+            continue;
+        }
+
+        DronecanActuatorCommand *const destination =
+            &array_command.commands[array_command.command_count];
+        destination->actuator_id = source->actuator_id;
+        destination->value = source->value;
+        destination->command_id = source->command_id;
+        array_command.command_count++;
+    }
+
+    if (array_command.command_count == 0U)
+    {
+        return;
     }
 
     statistics.array_command_received_count++;

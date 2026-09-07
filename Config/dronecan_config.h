@@ -6,12 +6,19 @@
 #define DRONECAN_FC_NODE_STATUS_CAN_ID         0x10015501UL
 #define DRONECAN_FC_ARRAY_COMMAND_CAN_ID       0x0651A401UL
 
+/* This firmware instance only consumes commands for THACO actuator ID 1. */
+#define DRONECAN_ACTUATOR_ID                   1U
+
 /* Static libcanard arena: 8 blocks with the current 32-byte block size. */
 #define DRONECAN_MEMORY_POOL_SIZE              256U
 #define DRONECAN_RX_CLEANUP_PERIOD_MS          1000U
 
 #if ((DRONECAN_FC_NODE_ID < 1U) || (DRONECAN_FC_NODE_ID > 127U))
 #error "DRONECAN_FC_NODE_ID must be in the range 1..127"
+#endif
+
+#if (DRONECAN_ACTUATOR_ID > 255U)
+#error "DRONECAN_ACTUATOR_ID must fit in uint8_t"
 #endif
 
 #if (DRONECAN_FC_NODE_STATUS_CAN_ID > 0x1FFFFFFFUL)
